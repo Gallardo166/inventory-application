@@ -7,3 +7,9 @@ block content
   each item in allItemsInBrand 
     p 
       a(href=item.url) !{item.name}
+  br
+  hr
+  p
+    a(href=`/inventory/brand/update/${brand._id}`) Update Brand 
+  p 
+    a(href=`/inventory/brand/delete/${brand._id}`) Delete Brand

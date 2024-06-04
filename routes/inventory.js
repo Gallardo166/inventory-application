@@ -9,8 +9,6 @@ router.get("/", index);
 
 router.get("/brands", brand_list);
 
-router.get("/brand/:id", brand_detail);
-
 router.get("/brand/create", brand_create_get);
 
 router.post("/brand/create", brand_create_post);
@@ -23,9 +21,9 @@ router.get("/brand/update/:id", brand_update_get);
 
 router.post("/brand/update/:id", brand_update_post);
 
-router.get("/categories", category_list);
+router.get("/brand/:id", brand_detail);
 
-router.get("/category/:id", category_detail);
+router.get("/categories", category_list);
 
 router.get("/category/create", category_create_get);
 
@@ -39,9 +37,9 @@ router.get("/category/update/:id", category_update_get);
 
 router.post("/category/update/:id", category_update_post);
 
-router.get("/items", item_list);
+router.get("/category/:id", category_detail);
 
-router.get("/item/:id", item_detail);
+router.get("/items", item_list);
 
 router.get("/item/create", item_create_get);
 
@@ -54,5 +52,7 @@ router.post("/item/delete/:id", item_delete_post);
 router.get("/item/update/:id", item_update_get);
 
 router.post("/item/update/:id", item_update_post);
+
+router.get("/item/:id", item_detail);
 
 export default router;

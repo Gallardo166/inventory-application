@@ -1,0 +1,58 @@
+extends layout 
+
+block content 
+  h1 #{header} 
+
+  form(method="post") 
+    div
+      label(for="name") Name 
+      input#name(type="text", name="name", required, value!=(undefined===item ? "" : item.name))
+    if errors
+      each error in errors.filter(error => error.path==="name")
+        p #{error.msg}
+    div
+      label(for="description") Description
+      textarea#description(name="description", required) !{undefined===item ? "" : item.description}
+    if errors
+      each error in errors.filter(error => error.path==="description")
+        p #{error.msg}
+    div
+      label(for="category") Category
+      select#category(name="category", required) 
+        option(disabled, selected) -- Please select a category --
+        if (item && item.category)
+          each category in allCategories
+            option(value=category._id, selected=(category._id.toString()===item.category._id.toString())) !{category.name}
+        else 
+          each category in allCategories
+            option(value=category._id) !{category.name}
+      if errors
+        each error in errors.filter(error => error.path==="category")
+          p #{error.msg}
+    div
+      label Brands 
+        if item 
+          each brand in allBrands 
+            input(type="checkbox", name="brands", id=brand._id, value=brand._id, checked=item.brands.map(val => val.toString()).includes(brand._id.toString()))
+            label(for=brand._id) &nbsp;!{brand.name}
+        else
+          each brand in allBrands 
+            input(type="checkbox", name="brands", id=brand._id, value=brand._id)
+            label(for=brand._id) &nbsp;!{brand.name}
+      if errors
+        each error in errors.filter(error => error.path==="brands")
+          p #{error.msg}
+    div
+      label(for="price") Price 
+      input#price(type="number", name="price", required, value!=(undefined===item ? 0 : item.price))
+      if errors
+        each error in errors.filter(error => error.path==="price")
+          p #{error.msg}
+    div
+      label(for="stock") Stock 
+      input#stock(type="number", name="stock", required, value!=(undefined===item ? 0: item.stock))
+      if errors
+        each error in errors.filter(error => error.path==="stock")
+          p #{error.msg}
+    button(type="submit") #{header}
+

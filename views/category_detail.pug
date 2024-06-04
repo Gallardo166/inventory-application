@@ -1,9 +1,15 @@
 extends layout 
 
 block content 
-  h1 !{category.name} Products
+  h1 !{categorySingular} Products
   include search
   
   each item in allItemsInCategory
     p 
       a(href=item.url) !{item.name}
+  br
+  hr
+  p
+    a(href=`/inventory/category/update/${category._id}`) Update Category 
+  p 
+    a(href=`/inventory/category/delete/${category._id}`) Delete Category

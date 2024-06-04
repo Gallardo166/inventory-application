@@ -12,22 +12,12 @@ block content
         if index < item.brands.length - 1
           |,&nbsp;
   
-  if item.variants.length > 1
-    table 
-      caption Variants
-      thead
-        tr 
-          th(scope="col") Variant
-          th(scope="col") Price 
-          th(scope="col") Stock 
-        each variant in item.variants 
-          tr 
-            td !{variant.name}
-            td $#{variant.price}
-            td #{variant.stock}
-        tr 
-          th(scope="row" colspan="2") Total Stock 
-          td #{item.total_stock}
+  p Price: $!{item.price}
+  p Stock: !{item.stock}
 
-  else
-    p Stock: !{item.total_stock}
+  br
+  hr
+  p
+    a(href=`/inventory/item/update/${item._id}`) Update Item 
+  p 
+    a(href=`/inventory/item/delete/${item._id}`) Delete Item

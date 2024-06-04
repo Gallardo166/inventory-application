@@ -1,0 +1,10 @@
+extends layout 
+
+block content 
+  h1 Delete !{category.name}
+  p WARNING: This will delete all items in the category.
+  p Are you sure you want to delete !{category.name}?
+
+  form(method="post") 
+    button(type="button") Cancel 
+    button(type="submit") Delete

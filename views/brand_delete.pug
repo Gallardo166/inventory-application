@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+  h1 Delete !{brand.name}
+  p Are you sure you want to delete !{brand.name}?
+
+  form(method="post") 
+    button(type="button") Cancel 
+    button(type="submit") Delete
