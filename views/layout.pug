@@ -4,4 +4,10 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    nav 
+      a(href="/inventory") Home
+      a(href="/inventory/items") Items
+      a(href="/inventory/categories") Categories
+      a(href="/inventory/brands") Brands
+    main
+      block content

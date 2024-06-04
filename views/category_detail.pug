@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+  h1 !{category.name} Products
+  include search
+  
+  each item in allItemsInCategory
+    p 
+      a(href=item.url) !{item.name}

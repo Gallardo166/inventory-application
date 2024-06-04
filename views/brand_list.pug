@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1 Brands 
+  include search
+  
+  if !allBrands.length
+    p No brands found
+  
+  each brand in allBrands 
+    p 
+      a(href=brand.url) !{brand.name}

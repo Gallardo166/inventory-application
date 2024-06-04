@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1 Categories
+  include search
+  
+  if !allCategories.length
+    p No categories found
+  
+  each category in allCategories 
+    p 
+      a(href=category.url) !{category.name}

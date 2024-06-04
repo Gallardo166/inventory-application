@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1 Items 
+  include search
+  
+  if !allItems.length
+    p No items found
+  
+  each item in allItems 
+    p 
+      a(href=item.url) !{item.name}

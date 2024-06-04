@@ -1,0 +1,33 @@
+extends layout 
+
+block content 
+  h1 !{item.name}
+  p(style="white-space: pre-wrap;") !{item.description}
+  p #[strong Category: ]
+    a(href=item.category.url) !{item.category.name}
+  if item.brands.length
+    p #[strong Brand#{item.brands.length > 1 ? "s" : ""}: ]
+      each brand, index in item.brands
+        a(href=item.brands[index].url) !{item.brands[index].name}
+        if index < item.brands.length - 1
+          |,&nbsp;
+  
+  if item.variants.length > 1
+    table 
+      caption Variants
+      thead
+        tr 
+          th(scope="col") Variant
+          th(scope="col") Price 
+          th(scope="col") Stock 
+        each variant in item.variants 
+          tr 
+            td !{variant.name}
+            td $#{variant.price}
+            td #{variant.stock}
+        tr 
+          th(scope="row" colspan="2") Total Stock 
+          td #{item.total_stock}
+
+  else
+    p Stock: !{item.total_stock}
