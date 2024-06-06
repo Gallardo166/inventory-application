@@ -7,6 +7,8 @@ block content
   if !allItems.length
     p No items found
   
-  each item in allItems 
-    p 
+  div.content
+    each item, index in allItems 
       a(href=item.url) !{item.name}
+      if index < allItems.length - 1
+        hr

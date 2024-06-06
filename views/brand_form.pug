@@ -3,11 +3,11 @@ extends layout
 block content 
   h1 #{header}
 
-  form(method="post") 
+  form.post(method="post") 
     div
       label(for="name") Name 
       input#name(type="text", name="name", required, value!=(undefined===brand ? "" : brand.name))
     if errors
       each error in errors
         p #{error.msg}
-    button(type="submit") #{header}
+    button.submit-button(type="submit") #{header}

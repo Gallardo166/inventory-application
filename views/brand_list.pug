@@ -7,6 +7,8 @@ block content
   if !allBrands.length
     p No brands found
   
-  each brand in allBrands 
-    p 
+  div.content
+    each brand, index in allBrands
       a(href=brand.url) !{brand.name}
+      if index < allBrands.length - 1
+        hr

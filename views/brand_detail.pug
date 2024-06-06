@@ -4,12 +4,12 @@ block content
   h1 !{brand.name} Products
   include search
   
-  each item in allItemsInBrand 
-    p 
+  div.content
+    each item, index in allItemsInBrand
       a(href=item.url) !{item.name}
-  br
+      if index < allItemsInBrand - 1
+        hr
   hr
-  p
-    a(href=`/inventory/brand/update/${brand._id}`) Update Brand 
-  p 
-    a(href=`/inventory/brand/delete/${brand._id}`) Delete Brand
+  div.brand-links
+    a.update-brand(href=`/inventory/brand/update/${brand._id}`) Update Brand 
+    a.delete-brand(href=`/inventory/brand/delete/${brand._id}`) Delete Brand

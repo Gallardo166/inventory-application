@@ -4,12 +4,12 @@ block content
   h1 !{categorySingular} Products
   include search
   
-  each item in allItemsInCategory
-    p 
+  div.content
+    each item, index in allItemsInCategory
       a(href=item.url) !{item.name}
-  br
+      if index < allItemsInCategory.length - 1
+        hr
   hr
-  p
-    a(href=`/inventory/category/update/${category._id}`) Update Category 
-  p 
-    a(href=`/inventory/category/delete/${category._id}`) Delete Category
+  div.category-links
+    a.update-category(href=`/inventory/category/update/${category._id}`) Update This Category 
+    a.delete-category(href=`/inventory/category/delete/${category._id}`) Delete This Category

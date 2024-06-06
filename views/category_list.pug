@@ -7,6 +7,8 @@ block content
   if !allCategories.length
     p No categories found
   
-  each category in allCategories 
-    p 
+  div.content
+    each category, index in allCategories 
       a(href=category.url) !{category.name}
+      if index < allCategories.length - 1
+        hr

@@ -5,12 +5,12 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     nav 
-      a(href="/inventory") Home
-      a(href="/inventory/items") Items
-      a(href="/inventory/categories") Categories
-      a(href="/inventory/brands") Brands
-      a(href="/inventory/item/create") Create Item
-      a(href="/inventory/category/create") Create Category
-      a(href="/inventory/brand/create") Create Brand
+      div.home-link
+        a(href="/inventory") Home
+      div.other-links
+        a(href="/inventory/items") Items
+        a(href="/inventory/categories") Categories
+        a(href="/inventory/brands") Brands
     main
       block content
+      include create
