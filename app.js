@@ -13,10 +13,22 @@ const __dirname = dirname(__filename);
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import inventoryRouter from './routes/inventory.js'
+import 'dotenv/config';
+import compression from 'compression';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 20,
+});
+
+app.use(limiter);
+
 mongoose.set("strictQuery", false);
 const dev_db_url = "mongodb+srv://test:testinguser@cluster0.yokgayx.mongodb.net/inventory_application?retryWrites=true&w=majority&appName=Cluster0";
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -31,6 +43,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(compression());
+app.use(helmet());
 app.use(express.static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);
