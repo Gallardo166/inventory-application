@@ -34,6 +34,9 @@ const ItemSchema = new Schema({
     min: 0,
     required: true,
   },
+  imageurl: {
+    type: String,
+  }
 });
 
 ItemSchema.virtual("url").get(function () {

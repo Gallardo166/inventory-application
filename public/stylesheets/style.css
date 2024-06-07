@@ -132,6 +132,11 @@ div.brands {
   grid-template: auto / repeat(3, 1fr);
 }
 
+form > div.remove-image {
+  font-size: 0.9rem;
+  flex-direction: row;
+}
+
 .submit-button, .delete-button, .cancel-button {
   margin-top: 16px;
   padding: 8px;
@@ -160,4 +165,19 @@ p > a {
 
 p.description {
   margin-bottom: 24px;
+}
+
+p.error {
+  color: #de3b3b;
+}
+
+.main-info {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 24px;
+}
+
+img {
+  margin-top: 42px;
+  width: 400px;
 }

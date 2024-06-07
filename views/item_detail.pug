@@ -1,8 +1,12 @@
 extends layout 
 
 block content 
-  h1 !{item.name}
-  p.description(style="white-space: pre-wrap;") !{item.description}
+  div.main-info
+    if item.imageurl
+      img(src=item.imageurl, alt="Image")
+    div.text
+      h1 !{item.name}
+      p.description(style="white-space: pre-wrap;") !{item.description}
   p #[strong Category: ]
     a(href=item.category.url) !{item.category.name}
   if item.brands.length

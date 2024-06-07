@@ -9,5 +9,5 @@ block content
       input#name(type="text", name="name", required, value!=(undefined===category ? "" : category.name))
     if errors
       each error in errors
-        p #{error.msg}
+        p.error #{error.msg}
     button.submit-button(type="submit") #{header}

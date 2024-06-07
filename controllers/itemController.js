@@ -3,6 +3,17 @@ import Brand from "../models/brand.js";
 import Category from "../models/category.js";
 import asyncHandler from "express-async-handler";
 import { body, validationResult } from "express-validator";
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import 'dotenv/config';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+})
+
+const upload = multer({ dest: "uploads/" });
 
 const index = asyncHandler(async (req, res, next) => {
   const [brandCount, categoryCount, itemCount] = await Promise.all([
@@ -61,6 +72,8 @@ const item_create_get = asyncHandler(async (req, res, next) => {
 });
 
 const item_create_post = [
+  upload.single("item_image"),
+
   body("name")
     .trim()
     .isLength({ min: 1 }).withMessage("Name must not be empty.")
@@ -112,6 +125,16 @@ const item_create_post = [
       });
       return;
     }
+    try {
+      if (req.file) {
+        const imageResult = await cloudinary.uploader.upload(req.file.path);
+        item.imageurl = imageResult.secure_url;
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Error uploading image to Cloudinary" });
+      return;
+    }
     await item.save();
     res.redirect(item.url);
   })
@@ -158,6 +181,8 @@ const item_update_get = asyncHandler(async (req, res, next) => {
 });
 
 const item_update_post = [
+  upload.single("item_image"),
+
   body("name")
     .trim()
     .isLength({ min: 1 }).withMessage("Please fill in the item name.")
@@ -209,6 +234,19 @@ const item_update_post = [
         errors: errors.array(),
       });
       return
+    }
+
+    try {
+      if (req.file) {
+        const imageResult = await cloudinary.uploader.upload(req.file.path);
+        item.imageurl = imageResult.secure_url;
+      } else if (req.body.removeImage) {
+        item.imageurl = "";
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Error uploading image to Cloudinary" });
+      return;
     }
     const updatedItem = await Item.findByIdAndUpdate(item._id, item, {});
     res.redirect(updatedItem.url);

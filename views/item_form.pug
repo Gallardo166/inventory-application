@@ -3,19 +3,26 @@ extends layout
 block content 
   h1 #{header} 
 
-  form.post(method="post") 
+  form.post(method="post" enctype="multipart/form-data") 
     div
       label(for="name") Name 
       input#name(type="text", name="name", required, value!=(undefined===item ? "" : item.name))
     if errors
       each error in errors.filter(error => error.path==="name")
-        p #{error.msg}
+        p.error #{error.msg}
     div
       label(for="description") Description
       textarea#description(name="description", required) !{undefined===item ? "" : item.description}
     if errors
       each error in errors.filter(error => error.path==="description")
-        p #{error.msg}
+        p.error #{error.msg}
+    div 
+      label(for="image") Image (Optional)
+      input#image(type="file", name="item_image")
+    if header==="Update Item"
+      div.remove-image
+        label Remove current image?
+        input#remove-image(type="checkbox", name="removeImage")
     div
       label(for="category") Category
       select#category(name="category", required) 
@@ -28,7 +35,7 @@ block content
             option(value=category._id) !{category.name}
       if errors
         each error in errors.filter(error => error.path==="category")
-          p #{error.msg}
+          p.error #{error.msg}
     div
       label Brands 
         div.brands
@@ -44,18 +51,18 @@ block content
                 label(for=brand._id) &nbsp;!{brand.name}
       if errors
         each error in errors.filter(error => error.path==="brands")
-          p #{error.msg}
+          p.error #{error.msg}
     div
       label(for="price") Price 
       input#price(type="number", name="price", required, value!=(undefined===item ? 0 : item.price))
       if errors
         each error in errors.filter(error => error.path==="price")
-          p #{error.msg}
+          p.error #{error.msg}
     div
       label(for="stock") Stock 
       input#stock(type="number", name="stock", required, value!=(undefined===item ? 0: item.stock))
       if errors
         each error in errors.filter(error => error.path==="stock")
-          p #{error.msg}
+          p.erro #{error.msg}
     button.submit-button(type="submit") #{header}
 
